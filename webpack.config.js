@@ -15,9 +15,9 @@ let config = {
       {
         test: /\.js?/,
         include: APP_DIR,
-        loader: 'babel-loader'
+        loaders: ["react-hot-loader", "babel-loader"]
       }
-    ]
+    ],
   }
 };
 

@@ -1,21 +1,42 @@
 import React from "react";
+import connect from "react-redux/es/connect/connect";
+import {addTask} from "../actions/TaskActions";
+
+
+let createHandlers = function (dispatch) {
+  let onClick = function (event, data) {
+    event.preventDefault();
+    event.stopPropagation();
+    dispatch(addTask(data));
+  };
+
+  return {
+    onClick
+  };
+};
+
+
 class Task extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handlers = createHandlers(this.props.dispatch)
+  }
 
   render() {
     return (
-      <div className="col s4">
-        <div className="card blue-grey darken-1">
-          <div className="card-content white-text">
-            <span className="card-title">{this.props.name}</span>
-            <p>{this.props.description}</p>
-          </div>
-          <div className="card-action">
-            <a className="waves-effect waves-light btn">Done</a>
-          </div>
+      <li className="collection-item dismissable">
+        <div>
+          {this.props.name}
+          <a href="#!" onClick={this.handlers.onClick} className="secondary-content">
+            <i className="material-icons">
+              delete
+            </i>
+          </a>
         </div>
-      </div>
+      </li>
     )
   }
 
 }
-export default Task;
+
+export default connect()(Task);

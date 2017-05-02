@@ -1,5 +1,6 @@
 import React from "react";
 import Task from "./Task";
+import connect from "react-redux/es/connect/connect";
 
 class List extends React.Component {
 
@@ -9,17 +10,16 @@ class List extends React.Component {
 
   render() {
     let listItems = this.props.elements.map((el, i) =>
-      <Task name={el.name} key={i}/>
+      <Task name={el.name} key={i} description={el.description} id={el.id}/>
     );
 
     return (
-      <div className="row">
+      <ul className="collection">
         {listItems}
-      </div>
+      </ul>
     )
   }
 
 }
 
-
-export default List;
+export default connect()(List);
