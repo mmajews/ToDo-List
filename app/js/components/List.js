@@ -9,6 +9,7 @@ class List extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     let listItems = this.props.elements.map((el, i) =>
       <Task name={el.name} key={i} description={el.description} id={el.id}/>
     );

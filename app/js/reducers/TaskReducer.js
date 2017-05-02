@@ -1,11 +1,10 @@
 import {ADD_TASK, REMOVE_TASK} from "../actions/TaskActionsTypes";
 let initialState = [];
 
-function getEveryTaskButWithId(state, action) {
-  return state.tasks.filter(
+function getEveryTaskButWithId(tasks, id) {
+  return tasks.filter(
     function (el) {
-      console.log(el.id);
-      return el.id !== action.id
+      return el.id !== id
     });
 }
 
@@ -20,8 +19,10 @@ export function taskReducer(state, action) {
       console.log("ADD TASK");
       break;
     }
+
     case REMOVE_TASK : {
-      let filteredTasks = getEveryTaskButWithId(state, action);
+      let filteredTasks = getEveryTaskButWithId(state.tasks, action.id);
+      console.log(filteredTasks);
       return Object.assign({}, state, {
         tasks: filteredTasks
       })
