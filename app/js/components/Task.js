@@ -1,17 +1,15 @@
 import React from "react";
 import connect from "react-redux/es/connect/connect";
-import {addTask} from "../actions/TaskActions";
+import {deleteTask} from "../actions/TaskActions";
 
 
 let createHandlers = function (dispatch) {
-  let onClick = function (event, data) {
-    event.preventDefault();
-    event.stopPropagation();
-    dispatch(addTask(data));
+  let onClickDelete = function (id, event) {
+    dispatch(deleteTask(id));
   };
 
   return {
-    onClick
+    onClickDelete
   };
 };
 
@@ -19,7 +17,8 @@ let createHandlers = function (dispatch) {
 class Task extends React.Component {
   constructor(props) {
     super(props);
-    this.handlers = createHandlers(this.props.dispatch)
+    this.handlers = createHandlers(this.props.dispatch);
+    this.id = this.props.id
   }
 
   render() {
@@ -27,7 +26,8 @@ class Task extends React.Component {
       <li className="collection-item dismissable">
         <div>
           {this.props.name}
-          <a href="#!" onClick={this.handlers.onClick} className="secondary-content">
+          {this.props.id}
+          <a href="#!" onClick={this.handlers.onClickDelete.bind(this, this.id)} className="secondary-content">
             <i className="material-icons">
               delete
             </i>

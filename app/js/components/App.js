@@ -5,8 +5,8 @@ import {connect} from "react-redux";
 
 class App extends React.Component {
 
-  componentWillMount() {
-    console.log(this.props)
+  constructor(props) {
+    super(props);
   }
 
   render() {
